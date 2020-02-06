@@ -1,13 +1,13 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
-const morgan = require('morgan')
+const morgan = require('morgan');
 
-const userRouter = require('./api/routes/user')
-const blogUser = require('./model/user')
+const userRouter = require('./api/routes/user');
+const blogRouter = require('./api/routes/blog');
 
-const mongodb = 'mongodb://localhost:27017/blogposts'
-app.use(express.json());
+const app = express();
+
+const mongodb = 'mongodb://localhost:27017/blogposts';
 
 mongoose.connect(mongodb, {
   useNewUrlParser: true,
@@ -17,9 +17,11 @@ mongoose.connect(mongodb, {
   if(!err){
     console.log('Connection Established with mongodb .....!!')
   }
-})  
+});
+app.use(express.json());
+app.use(morgan('dev'));
 
-app.use(morgan('dev'))
-app.use('/', userRouter)
+app.use(userRouter);
+app.use(blogRouter);
 
 module.exports = app;

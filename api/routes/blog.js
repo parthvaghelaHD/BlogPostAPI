@@ -1,20 +1,10 @@
 const express = require("express");
+const blogController = require('../../controller/blogController');
+const { verifyToken } = require('../../middelware/middelware')
+
 const router = express.Router();
-const mongoose = require('mongoose')
 
-const blogPost = require('../../model/posts');
-
-router.post("/", async (req, res) => {
-  let createUser;
-  try {
-    createUser = new blogPost(req.body);
-    await createUser.save();
-  } catch (err) {
-    res.status(400).json({
-      message: "error"
-    });
-  }
-  res.send(createUser);
-});
+router.post('/posts', verifyToken , blogController.addPost);
+router.get('/posts', verifyToken, blogController.getPost);
 
 module.exports = router;

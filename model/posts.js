@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
 
-const blogSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
+  postId: {
+    type: Number,
+  },
   title: {
     type: String,
   },
   description: {
     type: String,
   }
-});
+  
+})
 
-const blogPosts = mongoose.model("blogPost", blogSchema);
+const blogPosts = mongoose.model("blogPost", PostSchema);
 module.exports = blogPosts;
