@@ -6,16 +6,16 @@ const blogUser = require("../model/user");
 
 async function addUser(req, res) {
   let createUser;
-  //try {
+  try {
     createUser = new blogUser(req.body);
     await createUser.save();
     res.send(createUser)
 
-  //} catch (err) {
+  } catch (err) {
     res.status(400).json({
       message: "error"
     });
-  //}
+  }
 }
 
 async function login(req, res) {  
