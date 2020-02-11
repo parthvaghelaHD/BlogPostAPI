@@ -1,5 +1,4 @@
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +14,14 @@
         <h1 style="text-align: center;">Add Post</h1>
         <hr><br />
         <span><%= msg %></span><br /> <br />
+        
+        <br>
+        <br>
         <div>
           <label for="postTitle"> postTitle </label>
           <br>
           <br>
-
-          <input type="text" id="postTitle" name="postTitle" placeholder="Enter Post Title" />
+          <input type="text" id="title" name="title" placeholder="Enter Post Title" />
         </div>
         <br>
         <br>
@@ -28,7 +29,7 @@
           <label for="postDescription"> postDescription </label>
           <br>
           <br>
-          <textarea id="discription" name="discription" placeholder="Enter Discription"></textarea>
+          <textarea id="description" name="description" placeholder="Enter Discription"></textarea>
         </div>
         <div>
           <input type="submit" value="Add Post" onclick="return checkValidateData();">
@@ -40,7 +41,7 @@
     </div>
     <script type="text/javascript">
       function checkValidateData() {
-        let postTitle = document.getElementById('postTitle').value;
+        let postTitle = document.getElementById('title').value;
         let discription = document.getElementById('discription').value;
         if (postTitle && discription) {
           return true;

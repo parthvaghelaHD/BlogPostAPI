@@ -6,11 +6,16 @@ const postController = require('../controller/blogController');
 
 const { verifyToken } = require('../middelware/middelware');
 
-router.get('/', userController.login);
-router.get('/user/login', userController.login);
 router.get('/user/register', userController.register);
 router.post('/user/register', userController.addUser);
-router.post('/authenticate', userController.authenticate);
+
+
+router.get('/', userController.login);
+router.get('/user/login', userController.login);
+
+router.post('/user/dashbord', userController.dashbord);
+
+router.post('/authenticate', userController.authenticate);  
 router.get('/user/logout', userController.logout);
 
 router.get('/user/post', verifyToken, postController.Post);
