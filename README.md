@@ -1,15 +1,23 @@
-blogPots : 
-	This is a app all about add users and add Posts by perticular users and view posts from perticular user. and one of admin
-who can watch every posts.
+# blogPotsAPI : 
 
-# Install Dependencies
-```bash 
+## pre-Requirements
+node: v13.8.0
+mongoDB Shll version : ^4.2.2	
+
+## Following command for run this application 
+
+## Install Dependencies
+```node 
  npm i 
 ```
 
-# Start app
+## .env file for set the environment veriabls dynamically
+```node 
+SECRET_KEY = 'TheSecretKey@#!!'
+mongoURL = 'mongodb://localhost:27017/<b><-- Your Database Name --></b>'
+```
+
+## Start app
 ```bash
 npm start
 ```
-
-
