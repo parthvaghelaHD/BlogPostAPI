@@ -7,6 +7,7 @@
 </head>
 
 <body>
+  <center>
   <%- include ('navbar.ejs') %>
   <span class="container margin-30">
     <form method="POST" action="/post/user">
@@ -15,14 +16,23 @@
         <hr><br />
         <span><%= msg %></span><br /> <br />
         <div>
+          <label for="postTitle"> postTitle </label>
+          <br>
+          <br>
+
           <input type="text" id="postTitle" name="postTitle" placeholder="Enter Post Title" />
         </div>
+        <br>
+        <br>
         <div>
+          <label for="postDescription"> postDescription </label>
+          <br>
+          <br>
           <textarea id="discription" name="discription" placeholder="Enter Discription"></textarea>
         </div>
-        <div style="margin-left: 5%;">
-          <input type="submit" value="Add Post" onclick="return checkValidateData();"
-            style="margin:2% 2%  2% 0;" />
+        <div>
+          <input type="submit" value="Add Post" onclick="return checkValidateData();">
+          <br>
           <button class="btn btn-danger col-lg-2" type="reset">CANCEL</button>
         </div>
       </div>
@@ -40,6 +50,7 @@
         }
       }
     </script>
+</center>
 </body>
 
 </html>
