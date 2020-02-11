@@ -1,5 +1,6 @@
 # blogPotsAPI : 
-
+<br>
+<br>
 ## pre-Requirements
 node: v13.8.0
 mongoDB Shll version : ^4.2.2	
@@ -14,7 +15,7 @@ mongoDB Shll version : ^4.2.2
 ## .env file for set the environment veriabls dynamically
 ```node 
 SECRET_KEY = 'TheSecretKey@#!!'
-mongoURL = 'mongodb://localhost:27017/<b><-- Your Database Name --></b>'
+mongoURL = 'mongodb://localhost:27017/<-- Your Database Name -->'
 ```
 
 ## Start app
