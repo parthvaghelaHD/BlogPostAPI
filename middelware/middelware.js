@@ -1,25 +1,22 @@
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 function verifyToken(req, res, next) {
-  const bearerHeader = req.headers["authorization"];
-  if (typeof bearerHeader !== "undefined") {
-    jwt.verify(bearerHeader, process.env.SECRET_KEY, function(err, decoded)  {
-      if (err) {
-        return res.status(500).json({
-          message: "invalid verification token"
-        });
-      } else {
-        req.user = decoded.user.userId;
-        req.type = decoded.user.type;
-        next();
-      }
+  const headers = req.cookies.token;
+  console.log('headers', headers)
+  if (typeof headers != 'undefined') {
+    jwt.verify(headers, process.env.SECRET_KEY, (err, decode) => {
+     if (err) return res.status(401).send({ message: 'No token is provided.' });
+      console.log(decode)
+      req.user = decode.user.userName;      
+      req.type = decode.user.type;
+      next();
     });
   } else {
-    return res.status(500).json({
-      message: "invalid verification token"
+    res.status(400).json({
+      Message: 'Invalid Token'
     });
   }
 }
 
-module.exports = { verifyToken };
+module.exports = { verifyToken }

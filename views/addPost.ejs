@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+
+<body>
+  <%- include ('navbar.ejs') %>
+  <span class="container margin-30">
+    <form method="POST" action="/post/user">
+      <div>
+        <h1 style="text-align: center;">Add Post</h1>
+        <hr><br />
+        <span><%= msg %></span><br /> <br />
+        <div>
+          <input type="text" id="postTitle" name="postTitle" placeholder="Enter Post Title" />
+        </div>
+        <div>
+          <textarea id="discription" name="discription" placeholder="Enter Discription"></textarea>
+        </div>
+        <div style="margin-left: 5%;">
+          <input type="submit" value="Add Post" onclick="return checkValidateData();"
+            style="margin:2% 2%  2% 0;" />
+          <button class="btn btn-danger col-lg-2" type="reset">CANCEL</button>
+        </div>
+      </div>
+    </form>
+    </div>
+    <script type="text/javascript">
+      function checkValidateData() {
+        let postTitle = document.getElementById('postTitle').value;
+        let discription = document.getElementById('discription').value;
+        if (postTitle && discription) {
+          return true;
+        } else {
+          alert('Field should not be null');
+          return false;
+        }
+      }
+    </script>
+</body>
+
+</html>

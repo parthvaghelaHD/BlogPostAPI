@@ -1,37 +1,39 @@
-const blogPost = require('../model/posts');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+
+const blogPost = require('../model/postModel');
+const { Message } = require('../commonFunction/commonfunction');
 
 async function addPost(req, res) {
-  req.body.postId = req.post;
-  let createPost;
+  req.body.userId = req.user;
+  let createPost = new blogPost(req.body);
   try {
-    createPost = new blogPost(req.body);
-    await createPost.save();
+    const post = await createPost.save();
+    res.render('addPost', { msg: "Post Added Successfully", email: req.user });
   } catch (err) {
-    res.status(400).json({
-      message: "error"
-    });
+    res.render('addPost', { msg: "Problem While Post Adding.", email: req.user });
   }
-  res.send(createPost);
 }
-
-
+function Post(req, res) {
+  res.render('addPost', { msg: "", email: req.user });
+}
 async function getPost(req, res) {
   try {
-    if (req.type == 1) {
-      const posts = await blogPost.find({});
-      res.send(posts)
-    } else {
-      const posts = await blogPost.find({ userId : req.user });
-      if (!posts) {
-        return res.status(404).json({
-          message: "post not found from get"
-        });
-      }
+    let post;
+    console.log(req.type,req.user);
+    if (req.type == 0) {
+      post = await blogPost.find({ userId: req.user });
+      (post.length > 0) ? res.render('viewPost', { post: post, email: req.user }) :
+        res.render('viewPost', "Post Not Found");
     }
-  } catch (error) {
-    res.status(500).send(error);
+    else {
+      post = await blogPost.find({});
+      post.length > 0 ? res.render('viewPost', { post: post, email: req.user }) :
+        res.render('viewPost', "Post Not Found");
+    }
+  } catch (err) {
+    res.json(Message(false, "Error", err));
   }
 }
 
-
-module.exports = { addPost , getPost}
+module.exports = { addPost, getPost, Post };
