@@ -16,22 +16,27 @@ async function addPost(req, res) {
   }
 }
 
+
+
 // adding a post
 function Post(req, res) {
   res.render("addPost", { msg: "", email: req.user });
 }
 
+
+
+//
 async function getPost(req, res) {
   try {
     let post;
     console.log(req.type,req.user);
     if (req.type == 0) {
-      post = await postModel.find({ userId: req.user });
+      post = await blogPost.find({ userId: req.user });
       post.length > 0 ? res.render('viewPost', { post: post, email: req.user }) :
         res.render('viewPost', "Post Not Found");
     }
     else {
-      post = await postModel.find({});
+      post = await blogPost.find({});
       post.length > 0 ? res.render('viewPost', { post: post, email: req.user }) :
         res.render('viewPost', "Post Not Found");
     }

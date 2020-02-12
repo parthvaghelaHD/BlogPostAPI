@@ -10,7 +10,7 @@ function register(req, res) {
 }
 
 // login Page render
-function login(req, res) {
+function getlogin(req, res) {
   res.render("login", { email: req.userName });
 }
 
@@ -27,6 +27,24 @@ async function addUser(req, res) {
 }
 
 
+// async function login(req, res) {
+//   User.findOne({ userName: req.body.userName, password: req.body.password }, { password: 0 },function (err, User) {
+//   if (err) return res.status(500).send('Error on the server.');
+//   if (!User) return res.status(404).send('No user found.');
+//   const token = jwt.sign({ id: User.id, role: User.type, name: User.userName }, process.env.SECRET_KEY);
+//   res.cookie('token',token, {httpOnly: true });
+//   res.redirect('/dash');
+//   });
+// };
+
+
+// exports.logout = function(req, res) {
+//   res.clearCookie('token').redirect('/login');
+// }
+
+
+
+
 function cookiesVerify(req, res, token) {
   if (req.cookies.token === undefined) {
     res.cookie('token', token, { maxAge: 900000, httpOnly: true }).redirect('/post/user');
@@ -35,8 +53,10 @@ function cookiesVerify(req, res, token) {
   }
 }
 
+
 async function authenticate(req, res) {
   console.log(req.body.userName, req.body.password)
+
   try {
     const user = await blogUser.findOne(
       { userName: req.body.userName, password: req.body.password },
@@ -50,17 +70,17 @@ async function authenticate(req, res) {
         }
       });
     } else {
-      res.json(Message(400, "false", "OK", "User Not Found"));
+      res.json(Message(400, "falseee", "OK", "User Not Found"));
     }
   } catch (err) {
-    res.json(Message(400, "false", "Bad Request", ""));
+    res.json(Message(400, "falsew", "Bad Request", ""));
   }
 }
 
 
 // logout function nd clear cookie 
 function logout(req, res) {
-  res.clearCookie("token").redirect("/user/login");
+  res.clearCookie('token').redirect('/user/login');
 }
 
 function dashbord(req, res){
@@ -71,7 +91,7 @@ function dashbord(req, res){
 module.exports = {
   addUser,
   authenticate,
-  login,
+  getlogin,
   register,
   logout,
   cookiesVerify,
