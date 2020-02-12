@@ -34,7 +34,6 @@
         <div class="form-group col-lg-12">
           <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" />
         </div>
-        
         <div class="form-group" style="margin-left: 25%;">
           <input type="submit" value="LOGIN" class="btn btn-info col-lg-4" onclick="return checkValidateData();"
             style="margin:2% 0  2% 0;" />
@@ -48,7 +47,7 @@
       let userName = document.getElementById('userName').value;
       let password = document.getElementById('password').value;
       let name = document.getElementById('name').value;
-      if (firstName && lastName && userName && password && contact) {
+      if (userName && password && name) {
         return true;
       } else {
         alert('Field should not be null');

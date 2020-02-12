@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
- function verifyToken(req, res, next) {
+
+function verifyToken(req, res, next) {
   const headers = req.cookies.token;
   if (typeof headers != 'undefined') {
     jwt.verify(headers, process.env.SECRET_KEY, (err, decode) => {
-     if (err) return res.status(401).send({ message: 'No token provided.' });
-      req.user = decode.user.userName;      
+      if (err) return res.status(401).send({ message: 'No token provided.' });
+      req.user = decode.user.userName;
+      req.discription = decode.user.description;
       req.type = decode.user.type;
       next();
     });
@@ -16,4 +18,4 @@ require('dotenv').config();
   }
 }
 
-module.exports = { verifyToken }
+module.exports = { verifyToken };

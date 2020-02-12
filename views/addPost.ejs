@@ -26,7 +26,6 @@
         <h1 style="text-align: center;">Add Post</h1>
         <hr><br />
         <span class="success"><%= msg %></span><br /> <br />
-        
         <div class="form-group col-lg-6 margin-30">
           <input type="text" id="title" name="title" class="form-control" placeholder="Enter Post Title" />
         </div>
@@ -43,7 +42,7 @@
     </div>
     <script type="text/javascript">
       function checkValidateData() {
-        let postTitle = document.getElementById('postTitle').value;
+        let postTitle = document.getElementById('title').value;
         let discription = document.getElementById('discription').value;
         if (postTitle && discription) {
           return true;

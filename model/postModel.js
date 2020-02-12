@@ -8,9 +8,8 @@ const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     require: true,
-    maxlength: 40
   },
-  description : {
+  discription : {
     type: String,
     require: true,
   }
