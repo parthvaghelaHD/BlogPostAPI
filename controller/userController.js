@@ -1,60 +1,73 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
-const blogUser = require('../model/userModel');
-const { Message } = require('../commonFunction/commonfunction');
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
+const blogUser = require("../model/userModel");
+const { Message } = require("../commonFunction/commonfunction");
+
+//register page render
 function register(req, res) {
-  res.render('register', { email: req.email });
+  res.render("register", { email: req.userName });
 }
 
-function login(req, res) {
-  res.render('login', { email: req.email });
+// login Page render
+function getlogin(req, res) {
+  res.render("login", { msg: req.flash("Error"), email: req.userName });
 }
 
+//register User
 async function addUser(req, res) {
-  const createUser = await blogUser.find({ userName: req.body.userName })
-  if (createUser.length != 1) {
-    let addUser = new blogUser(req.body);
-    try {
-      await addUser.save();
-      res.redirect('/user/login');
-    } catch (err) {
-      res.send(err);
-    }
-  } else {
-    res.redirect('/user/login');
+  let addUser = new blogUser(req.body);
+  try {
+    await addUser.save();
+    req.flash("sucess", "User added sucessfully");
+    res.redirect("/user/login");
+  } catch (err) {
+    res.send(err);
   }
 }
 
+//for verifying Cookie
+function cookiesVerify(req, res, token) {
+  if (req.cookies.token === undefined) {
+    res
+      .cookie("token", token, { maxAge: 900000, httpOnly: true })
+      .redirect("/post/user");
+  } else {
+    res.json(Message(400, "false", "You are already logged in", ""));
+  }
+}
+
+//authenticate user
 async function authenticate(req, res) {
   try {
-    const user = await blogUser.findOne({ userName: req.body.userName, password: req.body.password }, { password: 0 });
-    if (user !== null) {
-      jwt.sign({ user }, process.env.SECRET_KEY, function (err, token) {
+    const user = await blogUser.findOne(
+      { userName: req.body.userName, password: req.body.password },
+      { password: 0 }
+    );
+    if (user) {
+      jwt.sign({ user }, process.env.SECRET_KEY, function(err, token) {
         if (token) {
           cookiesVerify(req, res, token);
         }
       });
     } else {
-      res.json(Message(400, "false", 'OK', 'User Not Found'));
+      res.json(Message(400, "falseee", "OK", "User Not Found"));
     }
   } catch (err) {
-    res.json(Message(400, "false", 'Bad Request', ''));
+    res.json(Message(400, "false", "Bad Request", ""));
   }
 }
 
+// logout function nd clear cookie
 function logout(req, res) {
-  res.clearCookie('token').redirect('/user/login');
+  res.clearCookie("token").redirect("/user/login");
 }
 
-function cookiesVerify(req, res, token) {
-  if (req.cookies.token === undefined) {
-    res.cookie('token', token, { maxAge: 100000, httpOnly: true }).redirect('/post/user');
-  } else {
-    res.send(400).json({
-      Message: 'You are already logged in'
-    })
-  }
-}
-
-module.exports = { addUser, authenticate, login, register, logout, cookiesVerify };
+module.exports = {
+  addUser,
+  authenticate,
+  getlogin,
+  register,
+  logout,
+  cookiesVerify
+};
