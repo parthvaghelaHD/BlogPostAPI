@@ -1,4 +1,4 @@
-# blogPotsAPI : 
+# blogPotsApplication : 
 <br>
 <br>
 

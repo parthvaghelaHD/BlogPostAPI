@@ -1,25 +1,26 @@
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
+require("dotenv").config();
 
-const blogUser = require('../model/userModel');
-const { Message } = require('../commonFunction/commonfunction');
+const blogUser = require("../model/userModel");
+const { Message } = require("../commonFunction/commonfunction");
 
 //register page render
 function register(req, res) {
-  res.render('register', { email: req.userName });
+  res.render("register", { email: req.userName });
 }
 
 // login Page render
 function getlogin(req, res) {
-  res.render('login', { email: req.userName });
+  res.render("login", { msg: req.flash("Error"), email: req.userName });
 }
 
 //register User
 async function addUser(req, res) {
-  let addUser = new blogUser(req.body);  
+  let addUser = new blogUser(req.body);
   try {
     await addUser.save();
-    res.redirect('/user/login');
+    req.flash("sucess", "User added sucessfully");
+    res.redirect("/user/login");
   } catch (err) {
     res.send(err);
   }
@@ -28,9 +29,11 @@ async function addUser(req, res) {
 //for verifying Cookie
 function cookiesVerify(req, res, token) {
   if (req.cookies.token === undefined) {
-    res.cookie('token', token, { maxAge: 900000, httpOnly: true }).redirect('/post/user');
+    res
+      .cookie("token", token, { maxAge: 900000, httpOnly: true })
+      .redirect("/post/user");
   } else {
-    res.json(Message(400, 'false', 'You are already logged in', ''));
+    res.json(Message(400, "false", "You are already logged in", ""));
   }
 }
 
@@ -48,16 +51,16 @@ async function authenticate(req, res) {
         }
       });
     } else {
-      res.json(Message(400, 'falseee', 'OK', 'User Not Found'));
+      res.json(Message(400, "falseee", "OK", "User Not Found"));
     }
   } catch (err) {
-    res.json(Message(400, 'false', 'Bad Request', ''));
+    res.json(Message(400, "false", "Bad Request", ""));
   }
 }
 
-// logout function nd clear cookie 
+// logout function nd clear cookie
 function logout(req, res) {
-  res.clearCookie('token').redirect('/user/login');
+  res.clearCookie("token").redirect("/user/login");
 }
 
 module.exports = {

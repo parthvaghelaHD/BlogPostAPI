@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "scripts": {  
+  "scripts": {
     "start": "nodemon server.js",
     "dev-start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,7 @@
     "mongodb": "^3.5.2",
     "mongoose": "^5.8.11",
     "morgan": "^1.9.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "req-flash": "0.0.3"
   }
 }

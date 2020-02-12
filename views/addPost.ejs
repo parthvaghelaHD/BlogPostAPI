@@ -20,7 +20,9 @@
 
 <body>
   <%- include ('navbar.ejs') %>
+  <center>
   <span class="container margin-30">
+    
     <form method="POST" class="form-handle" action="/post/user">
       <div>
         <h1 style="text-align: center;">Add Post</h1>
@@ -40,6 +42,7 @@
       </div>
     </form>
     </div>
+
     <script type="text/javascript">
       function checkValidateData() {
         let postTitle = document.getElementById('title').value;
@@ -52,6 +55,7 @@
         }
       }
     </script>
+  </center>
 </body>
 
 </html>

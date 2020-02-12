@@ -12,9 +12,8 @@ function verifyToken(req, res, next) {
       next();
     });
   } else {
-    res.status(400).json({
-      Message: 'Invalid Token'
-    });
+    req.flash('Error', "User must Login")
+    res.redirect('/user/login');
   }
 }
 

@@ -20,6 +20,7 @@ router.post('user/login', userController.authenticate)
 router.post('/user/authenticate', userController.authenticate);  
 router.get('/user/logout', userController.logout);
 
+router.get('/dashboard', verifyToken, postController.dashboard);
 //add posts 
 router.get('/user/post', verifyToken, postController.Post);
 

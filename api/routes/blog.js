@@ -13,6 +13,4 @@ router.get('/posts', verifyToken, function (req, res) {
 });
 
 
-
-
 module.exports = router;

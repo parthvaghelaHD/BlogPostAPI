@@ -10,7 +10,8 @@ async function addPost(req, res) {
   let createpost = new blogPost(req.body);
   try {
     const post = await createpost.save();
-    res.render('addPost', { msg: 'Post Added Successfully', email: req.user });
+    req.flash('success', 'post added sucessfully')
+    res.redirect('/post/user');
   } catch (err) {
     res.render('addPost', { msg: 'Problem While Post Adding.', email: req.user });
   }
@@ -27,18 +28,20 @@ async function getPost(req, res) {
     let post;
     if (req.type == 0) {
       post = await blogPost.find({ userId: req.user });
-      post.length > 0 ? res.render('viewPost', { post: post, email: req.user }) :
-        res.render('viewPost', "Post Not Found");
+      post.length > 0 ? res.render('viewPost', { msg: req.flash('success'), post: post, email: req.user }) :
+        res.render('viewPost', { msg:"Post Not Found", post: 0, email: req.user });
     }
     if (req.type == 1) {
       post = await blogPost.find({});
-      console.log('heeeeeeeeeeeeee')
-      post.length > 0 ? res.render('viewPost', { post: post, email: req.user }) :
-        res.render('viewPost', "Post Not Found");
+      post.length > 0 ? res.render('viewPost', { msg:req.flash('success'), post: post, email: req.user }) :
+        res.render('viewPost', { msg:"Post Not Found", post: 0, email: req.user});
     }
   } catch (err) {
     res.json(Message(false, "Error", err));
   }
 }
+function dashboard(req, res) {
+  res.render('dashboard', { name: req.name});
+}
 
-module.exports = { addPost, Post, getPost };
+module.exports = { addPost, Post, getPost, dashboard };
