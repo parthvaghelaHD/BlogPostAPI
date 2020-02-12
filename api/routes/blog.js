@@ -12,5 +12,4 @@ router.get('/posts', verifyToken, function (req, res) {
   blogController.getPost
 });
 
-
 module.exports = router;
