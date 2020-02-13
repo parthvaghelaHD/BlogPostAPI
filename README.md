@@ -5,7 +5,7 @@
 ## pre-Requirements
 ```node 
 node: v13.8.0
-mongoDB Shll version : ^4.2.2	
+mongoDB Shell version : ^4.2.2	
 ```
 <br>
 
