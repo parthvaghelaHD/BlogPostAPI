@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const PostSchema = new mongoose.Schema({  
   userId: {
     type: String,
@@ -8,10 +9,12 @@ const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     require: true,
+    unique: true,
   },
   discription : {
     type: String,
     require: true,
+    unique: true,
   }
 }, { versionKey: false });
 

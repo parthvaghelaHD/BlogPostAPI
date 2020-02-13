@@ -14,6 +14,21 @@ function getlogin(req, res) {
   res.render("login", { msg: req.flash("Error"), email: req.userName });
 }
 
+//get a home page
+function getHome(req, res) {
+  res.render("index", { msg: req.flash("Error"), email: req.userName });
+}
+
+//get a dashbord page after login
+function dashbord(req, res) {
+  res.render("dashbord", { email: req.userName });
+}
+
+// logout function nd clear cookie
+function logout(req, res) {
+  res.clearCookie("token").redirect("/user/login");
+}
+
 //register User
 async function addUser(req, res) {
   let addUser = new blogUser(req.body);
@@ -31,9 +46,9 @@ function cookiesVerify(req, res, token) {
   if (req.cookies.token === undefined) {
     res
       .cookie("token", token, { maxAge: 900000, httpOnly: true })
-      .redirect("/post/user");
+      .redirect("/dashbord");
   } else {
-    res.json(Message(400, "false", "You are already logged in", ""));
+    res.redirect("/user/post");
   }
 }
 
@@ -51,23 +66,21 @@ async function authenticate(req, res) {
         }
       });
     } else {
-      res.json(Message(400, "falseee", "OK", "User Not Found"));
+      res.redirect("/user/login");
     }
   } catch (err) {
     res.json(Message(400, "false", "Bad Request", ""));
   }
 }
 
-// logout function nd clear cookie
-function logout(req, res) {
-  res.clearCookie("token").redirect("/user/login");
-}
-
+//exports modules
 module.exports = {
   addUser,
   authenticate,
   getlogin,
   register,
+  dashbord,
   logout,
+  getHome,
   cookiesVerify
 };

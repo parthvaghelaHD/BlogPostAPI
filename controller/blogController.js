@@ -40,8 +40,5 @@ async function getPost(req, res) {
     res.json(Message(false, "Error", err));
   }
 }
-function dashboard(req, res) {
-  res.render('dashboard', { name: req.name});
-}
 
-module.exports = { addPost, Post, getPost, dashboard };
+module.exports = { addPost, Post, getPost };

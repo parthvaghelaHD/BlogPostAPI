@@ -24,41 +24,68 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>View Post</title>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <style>
+      .heart i.fa-heart{
+        color: #f44336;
+      }
+      .heart{
+        animation: heart 0.5s linear;
+      }
+      @keyframes heart {
+        0%{
+          transform: rotate(0deg) scale(1.7);
+        }
+      }
+    </style>
+</head>
   <body>
     <%- include ('navbar.ejs') %>
-    <br>
+    <br />
     <% if(msg) {%>
-      <div class="alert alert-success" role="success">
-       <%= msg%>
-      </div>
-      <%}%>
-    <h3>Welcome <%= email %>, </h3>
-    <br />
-    <br />
+    <div class="alert alert-success" role="success">
+      <%= msg%>
+    </div>
+    <%}%>
+
+    <h3>Welcome <%= email %>,</h3>
+    <br>
+    <br>
+  <% if(post.length) { %>
     <div class="container">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope='col'>Sr.No</th>
-          <th scope='col'>Id</th>
-          <th scope='col'>title</th>
-          <th scope='col'>discription</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% let count = 1; for(let i= 0; i < post.length; i++) {%>
-        <tr>
-          <th scope='row'><%= count %></th>
-          <th><%= post[i]._id %></th>
-          <th><%= post[i].title %></th>
-          <th><%= post[i].discription %></th>
-        </tr>
-        <% count++; }%>
-      </tbody>
-    </table>
+      <% for(let i= 0; i < post.length; i++) {%>
+        <div class="card" class="container-fluid">
+      <h4 class="card-header"><%= post[i].title %></h4>
+      <div class="card-body">
+        <h5 class="card-title"> <%= post[i].discription %></h5>
+        <br>
+        <a href="#" class="like">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+    </br>
+     <% }%>
+    </br>
+    <% } else { %>
+      <div class="box-container">
+        <h1 style="text-align: center; padding-top:7%;">Sorry! No post available.</h1>
+        <h5 style="text-align: center;">To publish new post <a href="/user/post">Click here..</a> </h5>
+      </div>
+      <% } %>
   </div>
-  </body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $(".like").click(function(){
+        $(this).toggleClass("heart")
+      })
+    })
+  </script>
+
+</body>
 </html>
