@@ -1,7 +1,7 @@
 # blogPotsApplication : 
 <br>
 
-## pre-Requirements
+## Pre-Requirements
 ```node 
 node: v13.8.0
 mongoDB Shell version : ^4.2.2	
