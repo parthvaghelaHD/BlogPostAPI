@@ -56,7 +56,7 @@
                           <div style="color: grey; float: right;">
                             <em><%= post[i].userId%></em>
                             <input
-                              type="hidden"
+                              type="hidden" 
                               name="postId"
                               value="<%= post[i]._id%>"
                             />
@@ -80,13 +80,15 @@
                 <hr />
                 <div class="post-footer-option container">
                   <ul class="list-unstyled">
-                    <%like.some((ele) => { if(ele.postId === post[i]._id &&
-                    ele.userId === email && ele.status === 1 ) { flag = 1; }});
-                    if(flag = 1) {%>
+                    <%like.some((ele) => { if(ele.postId == post[i]._id &&
+                    ele.userId == email && ele.status == 1 ) {
+                       flag = 1; 
+                      }});
+                    if(flag == 1) {%>
                     <button id="btnLike" type="submit">
                       <i
                         class="fa fa-thumbs-up"
-                        style="font-size: 30px;color: blue;"
+                        style="font-size: 30px;color: red;"
                       >
                       </i>
                       Like
@@ -95,7 +97,7 @@
                     <button id="btndisLike" type="submit">
                       <i
                         class="fa fa-thumbs-up"
-                        style="font-size: 30px;color: gray;"
+                        style="font-size: 30px;color: grey;"
                       >
                       </i>
                       Like

@@ -10,9 +10,10 @@ const likePostSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    like: {
-      type: Boolean,
-      required: true
+    status: {
+      type: Number,
+      require: true,
+      default: 0
     }
   },
   {
