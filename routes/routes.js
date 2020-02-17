@@ -24,12 +24,17 @@ router.post('/user/login', userController.authenticate)
 router.post('/user/authenticate', userController.authenticate);  
 router.get('/user/logout', userController.logout);
 
-// router.get('/dashboard', verifyToken, postController.dashboard);
 //add posts 
 router.get('/user/post', verifyToken, postController.Post);
+
+//get likes 
+router.post('/like', verifyToken, postController.like);
 
 //get post and add posts
 router.get('/post/user', verifyToken, postController.getPost);
 router.post('/post/user', verifyToken, postController.addPost);
+
+//like post
+// router.post('/post/like', verifyToken, postController.like);
 
 module.exports = router;

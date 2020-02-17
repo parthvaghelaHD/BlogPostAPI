@@ -33,7 +33,7 @@ function logout(req, res) {
 async function addUser(req, res) {
   let addUser = new blogUser(req.body);
   try {
-    await addUser.save();
+    addUser.save();
     req.flash("sucess", "User added sucessfully");
     res.redirect("/user/login");
   } catch (err) {
@@ -66,10 +66,12 @@ async function authenticate(req, res) {
         }
       });
     } else {
+      
       res.redirect("/user/login");
     }
   } catch (err) {
-    res.json(Message(400, "false", "Bad Request", ""));
+    res.redirect("/user/login");
+
   }
 }
 

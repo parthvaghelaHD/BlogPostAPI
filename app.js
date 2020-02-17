@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const ejs = require('ejs')
 const bodyParser = require('body-parser');
 const flash = require('req-flash');
 require('dotenv').config();
@@ -24,10 +25,13 @@ mongoose.connect(
   },
   (err, res) => {
     if (!err) {
-      console.log('Connection Established with mongodb .....!!');
+      console.log('Connection established with mongodb .....!!');
+    }else{
+      console.log('something went wrong for mongodb connection..!!')
     }
   }
 );
+
 //set view engine as ejs
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
