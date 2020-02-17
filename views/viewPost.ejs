@@ -54,7 +54,9 @@
                         <h4 class="media-heading">
                           <em><%= post[i].title%></em>
                           <div style="color: grey; float: right;">
-                            <em><%= post[i].userId%></em>
+                            <span style="font-size: 16px"> published by &nbsp;&nbsp;
+                               <span style="font-size: 14px;color: salmon;"><em> -<%= post[i].userId%></em>
+                              </span></span>
                             <input
                               type="hidden" 
                               name="postId"
@@ -103,8 +105,11 @@
                       Like
                     </button>
                     <%}%>
+                <div style="color: grey; float: right;"><span style="font-size: 14px;color: salmon;">
+                  <em> -<%= moment().format('Do MMMM, YYYY') %></em></div>
                   </ul>
                 </div>
+                </span>
               </section>
             </div>
           </div>

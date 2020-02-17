@@ -37,7 +37,9 @@ const userSchema = new mongoose.Schema(
       maxlength: 1
     }
   },
-  { versionKey: false }
+  {timestamps : true},
+  { versionKey: false },
+  
 );
 
 userSchema.plugin(uniqueValidator);

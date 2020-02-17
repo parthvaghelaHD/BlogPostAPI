@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const moment = require('moment')
 require("dotenv").config();
 
 const blogPost = require("../model/postModel");
@@ -60,14 +61,16 @@ async function getPost(req, res) {
             msg: "",
             like: like,
             post: post,
-            email: req.user
+            email: req.user,
+            moment: moment 
           })
         : res.render("viewPost", {
             success: req.flash("success"),
             like: like,
             post: post,
             msg: "No Post Found",
-            email: req.user
+            email: req.user,
+            moment: moment 
           });
     } else {
       post = await blogPost.find({});
@@ -78,14 +81,16 @@ async function getPost(req, res) {
             msg: "",
             like: like,
             post: post,
-            email: req.user
+            email: req.user,
+            moment: moment 
           })
         : res.render("viewPost", {
             success: req.flash("success"),
             like: like,
             post: post,
             msg: "No Post Found",
-            email: req.user
+            email: req.user,
+            moment: moment 
           });
     }
   } catch (err) {

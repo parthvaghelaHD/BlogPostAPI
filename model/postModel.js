@@ -20,7 +20,8 @@ const PostSchema = new mongoose.Schema({
     require: true,
     unique: true,
   }
-}, { versionKey: false });
+},
+{timestamps : true}, { versionKey: false });
 
 const blogPosts = mongoose.model("blogPost", PostSchema);
 module.exports = blogPosts;

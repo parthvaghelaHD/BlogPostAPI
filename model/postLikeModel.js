@@ -16,6 +16,7 @@ const likePostSchema = new mongoose.Schema(
       default: 0
     }
   },
+  {timestamps : true},
   {
     versionKey: false
   }
