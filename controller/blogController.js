@@ -99,37 +99,32 @@ async function getPost(req, res) {
 }
 
 async function like(req, res) {
+  let resData, flag = 0;
   try {
     const likeExists = await likeModel.findOne({
-      postId: req.body.postId,
-      userId: req.body.userId,
-      status: { $eq: 1 }
+      postId: req.body.postId, userId: req.body.userId
     });
     if (likeExists) {
       try {
-        await likeModel.updateOne(
-          { postId: req.body.postId, userId: req.body.userId },
-          { $set: { status: 0 } }
-        );
+        resData = await likeModel.deleteOne({ postId: req.body.postId, userId: req.body.userId });
+        if (resData) {
+          flag = 0;
+        }
       } catch (err) {
-        res.send(
-          Message(400, false, `Error occured while liking a post ${err}`)
-        );
+        res.send(Message(400, false, `Error occured while liking a post ${err}`));
       }
     } else {
       try {
-        await likeModel.updateOne(
-          { postId: req.body.postId, userId: req.body.userId },
-          { $set: { status: 1 } },
-          { upsert: true }
-        );
+        data = new likeModel(req.body);
+        resData = await data.save();
+        if (resData) {
+          flag = 1;
+        }
       } catch (err) {
-        res.send(
-          Message(400, false, `Error occured while liking a post: ${err}`)
-        );
+        res.send(Message(400, false, `Error occured while liking a post: ${err}`));
       }
     }
-    res.redirect("/post/user");
+    res.json(flag);
   } catch (err) {
     res.send(Message(400, false, `Error occured while liking a post: ${err}`));
   }

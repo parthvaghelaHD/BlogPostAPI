@@ -6,7 +6,6 @@ function verifyToken(req, res, next) {
   if (typeof headers != 'undefined') {
     jwt.verify(headers, process.env.SECRET_KEY, (err, decode) => {
       if (err) return res.status(401).send({ message: 'No token provided.' });
-      console.log(decode)
       req.id = decode.user._id;
       req.user = decode.user.userName;
       req.discription = decode.user.description;

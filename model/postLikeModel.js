@@ -9,11 +9,6 @@ const likePostSchema = new mongoose.Schema(
     postId: {
       type: String,
       required: true
-    },
-    status: {
-      type: Number,
-      require: true,
-      default: 0
     }
   },
   {timestamps : true},

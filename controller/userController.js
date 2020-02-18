@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const bcrypt = require('bcryptjs')
 
 const blogUser = require("../model/userModel");
 const { Message } = require("../commonFunction/commonfunction");
@@ -52,6 +53,7 @@ function cookiesVerify(req, res, token) {
   }
 }
 
+//authenticate user
 //authenticate user
 async function authenticate(req, res) {
   try {
