@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs')
 
 const blogUser = require("../model/userModel");
 const { Message } = require("../commonFunction/commonfunction");
@@ -54,34 +54,26 @@ function cookiesVerify(req, res, token) {
 }
 
 //authenticate user
+//authenticate user
 async function authenticate(req, res) {
   try {
-    const user = blogUser.findOne({ userName: req.body.userName });
-    console.log("userrr", user);
-    co;
+    const user = await blogUser.findOne(
+      { userName: req.body.userName, password: req.body.password },
+      { password: 0 }
+    );
     if (user) {
-      const isMatch = await bcrypt.compare(password, user.password);
-      console.log(isMatch);
-      if (!isMatch) {
-        console.log("unable to login");
-      } else {
-        const user = blogUser.findOne(
-          { userName: req.body.userName, password: req.body.password },
-          { password: 0 }
-        );
-        if (user) {
-          jwt.sign({ user }, process.env.SECRET_KEY, function(err, token) {
-            if (token) {
-              cookiesVerify(req, res, token);
-            }
-          });
-        } else {
-          res.redirect("/user/login");
+      jwt.sign({ user }, process.env.SECRET_KEY, function(err, token) {
+        if (token) {
+          cookiesVerify(req, res, token);
         }
-      }
+      });
+    } else {
+      
+      res.redirect("/user/login");
     }
   } catch (err) {
     res.redirect("/user/login");
+
   }
 }
 

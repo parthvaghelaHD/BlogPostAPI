@@ -28,13 +28,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" 
-crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js" 
+integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
 
     <title>View Post</title>
 
     <style>
-      .iconunlike{
+      .iconunlike{  
       font-size: 30px;
       color: gray;
       }
@@ -89,13 +89,15 @@ crossorigin="anonymous"></script>
                             </i>
                             </button>                    
                       <% flag =0;} else {%>
-                          <button id="<%=post[i]._id%>_<%= email%>_dislike" name = "unlike" class="unlike"  value="unlike"
+                          <button id="<%=post[i]._id%>_<%= email%>_dislike" name = "unlike" class="unlike" 
+                             value="unlike"
                              type="submit"><i class="fa fa-thumbs-up iconunlike"
                               id="dislike">
                             </i>
                             </button>
                       <%}} else {%>
-                          <button id="<%=post[i]._id%>_<%= email%>_dislike" name = "unlike" class="unlike" value="unlike"
+                          <button id="<%=post[i]._id%>_<%= email%>_dislike" name = "unlike" class="unlike" 
+                            value="unlike"
                           type="submit"><i class="fa fa-thumbs-up iconunlike" id="dislike">
                           </i>
                           </button>              
