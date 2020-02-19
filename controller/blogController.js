@@ -5,7 +5,7 @@ require("dotenv").config();
 const blogPost = require("../model/postModel");
 const likeModel = require("../model/postLikeModel");
 const { Message } = require("../commonFunction/commonfunction");
-
+  
 // for add a post from perticular user
 async function addPost(req, res) {
   req.body.userId = req.user;

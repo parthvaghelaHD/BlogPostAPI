@@ -102,6 +102,8 @@
               placeholder="Enter password"
               required
             />
+            <span id="span9"></span>
+
           </div>
           <br />
           <center>
@@ -128,11 +130,15 @@
         var EmailId = document.getElementById("email").value;
         var MobileNumber = document.getElementById("mnumber").value;
         var userName = document.getElementById("userName").value;
+        var pwd = document.getElementById("password").value;
+
 
         var validatefullname = /^[a-zA-z ]{3,30}$/;
-        var validateUser = /^[a-zA-z]{3,30}$/;
         var validMail = /^\w{2,15}@\w{2,15}.\w{2,3}$/;
         var validMob = /^[6789]{1}[0-9]{9}$/;
+        var validateUser = /^[a-zA-z]{3,30}$/;
+        var validatepass = /^[a-zA-z]{3,30}$/;
+
 
         if (validatefullname.test(fullname)) {
           document.getElementById("span1").innerHTML = " ";
@@ -164,6 +170,9 @@
             " * Must be required character more then 3";
           return false;
         }
+
+        
+
       }
     </script>
   </body>

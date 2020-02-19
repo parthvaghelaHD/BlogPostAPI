@@ -34,7 +34,7 @@ function logout(req, res) {
 async function addUser(req, res) {
   let addUser = new blogUser(req.body);
   try {
-    addUser.save();
+    await addUser.save();
     req.flash("sucess", "User added sucessfully");
     res.redirect("/user/login");
   } catch (err) {
@@ -54,7 +54,6 @@ function cookiesVerify(req, res, token) {
 }
 
 //authenticate user
-//authenticate user
 async function authenticate(req, res) {
   try {
     const user = await blogUser.findOne(
@@ -68,12 +67,11 @@ async function authenticate(req, res) {
         }
       });
     } else {
-      
+      req.flash('Error' , 'user not found')
       res.redirect("/user/login");
     }
   } catch (err) {
     res.redirect("/user/login");
-
   }
 }
 
