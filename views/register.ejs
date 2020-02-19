@@ -129,7 +129,7 @@
         var MobileNumber = document.getElementById("mnumber").value;
         var userName = document.getElementById("userName").value;
 
-        var validatefullname = /^[a-zA-z]{5,30}$/;
+        var validatefullname = /^[a-zA-z ]{3,30}$/;
         var validateUser = /^[a-zA-z]{3,30}$/;
         var validMail = /^\w{2,15}@\w{2,15}.\w{2,3}$/;
         var validMob = /^[6789]{1}[0-9]{9}$/;
@@ -138,7 +138,7 @@
           document.getElementById("span1").innerHTML = " ";
         } else {
           document.getElementById("span1").innerHTML =
-            " * Must be required character more then 5";
+            " * Must be required character more then 3";
           return false;
         }
 

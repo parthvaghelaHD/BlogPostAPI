@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const moment = require('moment')
 
 const PostSchema = new mongoose.Schema({  
   userId: {
@@ -19,6 +19,11 @@ const PostSchema = new mongoose.Schema({
     type: String,
     require: true,
     unique: true,
+  },
+  createdAt: {
+    type: String,
+    require: true,
+    default:moment().format('DD-MM-YYYY')
   }
 },
 {timestamps : true}, { versionKey: false });
