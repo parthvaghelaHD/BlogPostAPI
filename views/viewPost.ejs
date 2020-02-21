@@ -85,13 +85,15 @@ integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="ano
                 }
               });                        
                if(flag == 1){%>
-              <button id="<%=post[i]._id%>_<%= email%>_like" name="like" class="like" value="like" type="submit">
+              <button id="<%=post[i]._id%>_<%= email%>_like" name="like" class="like" value="like"
+                 type="submit">
                 <i class="fa fa-thumbs-up iconlike" class="like"> </i>
               </button>
               <% if(likeCount[i].count !== undefined) {%>
               <span id="count_<%=post[i]._id%>_<%= email%>" name="countLikes"><%= likeCount[i].count%></span>
               <% flag =0;}} else {%>
-              <button id="<%=post[i]._id%>_<%= email%>_dislike" name="unlike" class="unlike" value="unlike" type="submit">
+              <button id="<%=post[i]._id%>_<%= email%>_dislike" name="unlike" class="unlike" value="unlike"
+                 type="submit">
                 <i class="fa fa-thumbs-up iconunlike" id="dislike"> </i>
               </button>
               <% if(likeCount[i].count !== undefined) {%>
@@ -99,14 +101,15 @@ integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="ano
               <%}else {%>
               <span id="count_<%=post[i]._id%>_<%= email%>" name="countLikes">0</span>
               <%}}} else {%>
-              <button id="<%=post[i]._id%>_<%= email%>_dislike" name="unlike" class="unlike" value="unlike" type="submit">
+              <button id="<%=post[i]._id%>_<%= email%>_dislike" name="unlike" class="unlike" value="unlike"
+                 type="submit">
                 <i class="fa fa-thumbs-up iconunlike" id="dislike"> </i>
               </button>
               <span id="count_<%=post[i]._id%>_<%= email%>" name="countLikes">0</span>
               <%}%>
               <div style="color: grey; float: right;margin: 20px;">
                 <span style="font-size: 16px"> created At &nbsp;&nbsp;
-                   <span style="font-size: 14px;color: salmon;"><em> -<%= post[i].createdAt%></em>
+                   <span style="font-size: 14px;color: salmon;"><em> <%= post[i].createdAt%></em>
               </div>
                 </ul>
             </section>
@@ -117,13 +120,11 @@ integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="ano
           <br />
             <div class="container" style="border: 1px solid black;padding: 30px;">
              <center> <h4>Sorry no posts found ! </h4> <br /> 
-                
                 <h5> Want to create a post ? <a href="/user/post">Click here </a> </h5>
-            </center></>
-          </div>
-
-              
-              <%}%>
+              </center>
+             <br/>
+            </div>
+         <%}%>
       </form>
     </div>
   </div>

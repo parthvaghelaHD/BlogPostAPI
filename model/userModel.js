@@ -28,7 +28,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       require: true,
-      minlength: 5
     },
     type: {
       type: Number,
@@ -41,8 +40,6 @@ const userSchema = new mongoose.Schema(
   { versionKey: false },
   
 );
-
-
 
 userSchema.plugin(uniqueValidator);
 const blogUser = mongoose.model("blogUsers", userSchema);

@@ -34,7 +34,4 @@ router.post('/like', verifyToken, postController.like);
 router.get('/post/user', verifyToken, postController.getPost);
 router.post('/post/user', verifyToken, postController.addPost);
 
-//like post
-// router.post('/post/like', verifyToken, postController.like);
-
 module.exports = router;

@@ -60,7 +60,7 @@ async function getPost(req, res) {
         success: req.flash('success'),
         msg: "", like: like, likeCount: likeCounter.flat(), moment, post: post, email: req.user
       }) : res.render('viewPost', {
-        success: req.flash('success'), like: like,moment, likeCount: likeCounter.flat(),
+         like: like,moment, likeCount: likeCounter.flat(),
         post: post, msg: "No Post Found", email: req.user
       });
     }

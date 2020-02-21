@@ -34,11 +34,10 @@ function logout(req, res) {
 async function addUser(req, res) {
   let addUser = new blogUser(req.body);
   try {
-    await addUser.save();
-    req.flash("sucess", "User added sucessfully");
+     addUser.save();
     res.redirect("/user/login");
   } catch (err) {
-    res.send(err);
+    res.redirect('/user/register')
   }
 }
 
@@ -60,14 +59,15 @@ async function authenticate(req, res) {
       { userName: req.body.userName, password: req.body.password },
       { password: 0 }
     );
-    if (user) {
+      try{
       jwt.sign({ user }, process.env.SECRET_KEY, function(err, token) {
         if (token) {
           cookiesVerify(req, res, token);
         }
       });
-    } else {
-      req.flash('Error' , 'user not found')
+    }
+      catch(e) {
+      console.log(e)
       res.redirect("/user/login");
     }
   } catch (err) {

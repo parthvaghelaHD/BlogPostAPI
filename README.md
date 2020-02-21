@@ -1,31 +1,64 @@
-# blogPotsApplication : 
-<br>
+# Paperless
 
-## Pre-Requirements
-```node 
-node: v13.8.0
-mongoDB Shell version : ^4.2.2	
+```bash 
+paperless description ..
 ```
-<br>
 
-## Following command for run this application 
-
-<br>
-
-## Install Dependencies
-```node 
- npm i 
+### Prerequisites
+   ```bash 
+node [v8.10.0](https://nodejs.org/en/)
 ```
-<br>
-
-## .env file for set the environment veriabls dynamically
-```node 
-SECRET_KEY = 'TheSecretKey@#!!'
-mongoURL = 'mongodb://localhost:27017/<-- Your Database Name -->'
+   ```bash 
+postgres [12.1](https://www.postgresql.org/download/)
 ```
-<br>
 
-## Start app
+
+## Installation
+You can download this repo or clone this using the below command
+
 ```bash
-npm start
+$ git clone https://bitbucket.org/kishan-bacancy/paperless.git
 ```
+
+Install all dependencies and modules:
+```bash
+$ cd paperless
+$ npm i
+$ run at : 127.0.0.1:3000
+```
+
+## Setup
+Once you clone or download project go into you folder
+> create a .env file
+ >now copy ***.env.local*** file to ***.env***
+ >npm install (it will install all the dependencies required for the project)
+ 
+#### dotenv file
+
+```bash 
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=mysecret
+DB_NAME=dbname
+DB_DIALECT=postgres
+DB_PORT=3306
+APP_HOST=localhost
+APP_PORT=3000
+SECRET=adasxovnklnqklnkjdsankdnw
+```
+
+### Tech
+
+paperless using mostly this technologies.
+
+* [ Express.js ] - Awesome web-based text editor
+* [ EJS ] - Markdown parser done right. Fast and easy to extend.
+* [Twitter Bootstrap] - Great UI for modern web apps
+* [Node.js] - Evented I/O for the backend
+
+
+License
+----
+
+MIT
+
