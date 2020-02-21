@@ -24,41 +24,149 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+<script src="https://code.jquery.com/jquery-3.1.1.js" 
+integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <title>View Post</title>
+    <style>
+      .iconunlike{  
+      font-size: 30px;
+      color: gray;
+      }
+      .iconlike{
+      font-size: 30px;
+      color: red;
+      }
+    </style>
   </head>
-
   <body>
-    <%- include ('navbar.ejs') %>
-    <br>
-    <% if(msg) {%>
-      <div class="alert alert-success" role="success">
-       <%= msg%>
-      </div>
-      <%}%>
-    <h3>Welcome <%= email %>, </h3>
-    <br />
-    <br />
+
+  <%- include ('navbar.ejs') %>
+    <h4 style="margin: 20px">  Welcome , <span style="color: indianred;"> <%= email %> </span>..!</h4>
     <div class="container">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope='col'>Sr.No</th>
-          <th scope='col'>Id</th>
-          <th scope='col'>title</th>
-          <th scope='col'>discription</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% let count = 1; for(let i= 0; i < post.length; i++) {%>
-        <tr>
-          <th scope='row'><%= count %></th>
-          <th><%= post[i]._id %></th>
-          <th><%= post[i].title %></th>
-          <th><%= post[i].discription %></th>
-        </tr>
-        <% count++; }%>
-      </tbody>
-    </table>
+    <div class="col-lg-12">
+      <% let flag =0; if(post.length) { for (let i = 0; i < post.length; i++) {%>
+  <form>
+    <div style="border:1px solid gray; border-radius: 5px;padding: 20px;" class="panel panel-default">
+      <div class="panel-body">
+        <section class="post-heading">
+          <div class="row">
+            <div class="col-md-11">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading">
+                    <em><%= post[i].title%></em>
+                    <div style="color: grey; float: right;">
+                      <span style="font-size: 16px"> published by &nbsp;&nbsp;
+                         <span style="font-size: 14px;color: salmon;"><em> -<%= post[i].userId%></em>
+                    </div>
+                  </h4>
+                  <hr />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="post-body">
+          <p><%= post[i].discription%></p>
+        </section>
+        <section class="post-footer">
+          <hr />
+          <div class="post-footer-option container">
+            <ul class="list-unstyled">
+              <% const likeCountFlag = 0;            
+              if(like.length){ like.some((ele) => { 
+                if(ele.postId == post[i]._id && ele.userId == email)
+                { 
+                  flag = 1; 
+                }
+              });                        
+               if(flag == 1){%>
+              <button id="<%=post[i]._id%>_<%= email%>_like" name="like" class="like" value="like"
+                 type="submit">
+                <i class="fa fa-thumbs-up iconlike" class="like"> </i>
+              </button>
+              <% if(likeCount[i].count !== undefined) {%>
+              <span id="count_<%=post[i]._id%>_<%= email%>" name="countLikes"><%= likeCount[i].count%></span>
+              <% flag =0;}} else {%>
+              <button id="<%=post[i]._id%>_<%= email%>_dislike" name="unlike" class="unlike" value="unlike"
+                 type="submit">
+                <i class="fa fa-thumbs-up iconunlike" id="dislike"> </i>
+              </button>
+              <% if(likeCount[i].count !== undefined) {%>
+              <span id="count_<%=post[i]._id%>_<%= email%>" name="countLikes"><%= likeCount[i].count%></span>
+              <%}else {%>
+              <span id="count_<%=post[i]._id%>_<%= email%>" name="countLikes">0</span>
+              <%}}} else {%>
+              <button id="<%=post[i]._id%>_<%= email%>_dislike" name="unlike" class="unlike" value="unlike"
+                 type="submit">
+                <i class="fa fa-thumbs-up iconunlike" id="dislike"> </i>
+              </button>
+              <span id="count_<%=post[i]._id%>_<%= email%>" name="countLikes">0</span>
+              <%}%>
+              <div style="color: grey; float: right;margin: 20px;">
+                <span style="font-size: 16px"> created At &nbsp;&nbsp;
+                   <span style="font-size: 14px;color: salmon;"><em> <%= post[i].createdAt%></em>
+              </div>
+                </ul>
+            </section>
+          </div>
+        </div>
+        <br />
+        <%} } else {%>
+          <br />
+            <div class="container" style="border: 1px solid black;padding: 30px;">
+             <center> <h4>Sorry no posts found ! </h4> <br /> 
+                <h5> Want to create a post ? <a href="/user/post">Click here </a> </h5>
+              </center>
+             <br/>
+            </div>
+         <%}%>
+      </form>
+    </div>
   </div>
+  <script>
+    $(document).ready(function () {
+      // like and unlike click
+      $(".like,.unlike").click(function (e) {
+        e.preventDefault();
+        if (this.id != "") {
+          let count;
+          let changeIconid = this.id;
+          let id = this.id; // Getting Button id
+          let split_id = id.split("_");
+          id = split_id[0]; // postid
+          let email = split_id[1];
+          // AJAX Request
+          $.ajax({
+            url: "/like",
+            type: "post",
+            data: { userId: email, postId: id },
+            dataType: "JSON",
+            success: function (data) {
+              $("#" + changeIconid).html("");
+              if (data == 1) {
+                count = $("#count_" + id + "_" + email).text();
+                $("#count_" + id + "_" + email).text(parseInt(count) + 1);
+                $("#" + changeIconid).html(
+                  '<i class="fa fa-thumbs-up iconlike" id="like"></i>'
+                );
+              } else {
+                count = $("#count_" + id + "_" + email).text();
+                $("#count_" + id + "_" + email).text(parseInt(count) - 1);
+                $("#" + changeIconid).html(
+                  '<i class="fa fa-thumbs-up iconunlike" id="dislike"></i>'
+                );
+              }
+            }
+          });
+        }
+      });
+    });
+  </script>
+      
   </body>
 </html>

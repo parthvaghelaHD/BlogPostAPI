@@ -12,17 +12,23 @@ const { verifyToken } = require('../middelware/middelware');
 router.get('/user/register', userController.register);
 router.post('/user/register', userController.addUser);
 
+// get home page without login and after login dashbord page
+router.get('/', userController.getHome)
+router.get('/dashbord', userController.dashbord)
+
 // get login page and post login data
 router.get('/user/login', userController.getlogin);
-router.post('user/login', userController.authenticate)
+router.post('/user/login', userController.authenticate)
 
 //authenticate and get logout page 
 router.post('/user/authenticate', userController.authenticate);  
 router.get('/user/logout', userController.logout);
 
-router.get('/dashboard', verifyToken, postController.dashboard);
 //add posts 
 router.get('/user/post', verifyToken, postController.Post);
+
+//get likes 
+router.post('/like', verifyToken, postController.like);
 
 //get post and add posts
 router.get('/post/user', verifyToken, postController.getPost);

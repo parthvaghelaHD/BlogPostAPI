@@ -1,60 +1,172 @@
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-  <title>Login</title>
-</head>
-
-<body>
-  <%- include ('navbar.ejs') %>
-  <div class="container margin-30 col-md-6">
-    <form method="POST" class="form-handle" action="/user/register">
-      <div>
-        <h1 style="text-align: center;"> Register</h1>
-        <hr><br>
-        <div class="form-group col-lg-12">
-          <input type="text" id="name" name="name" class="form-control" placeholder="Enter name" />
-        </div>
-        <div class="form-group col-lg-12">
-          <input type="text" id="userName" name="userName" class="form-control" placeholder="Enter User Name" />
-        </div>
-        <div class="form-group col-lg-12">
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" />
-        </div>
-        <div class="form-group" style="margin-left: 25%;">
-          <input type="submit" value="LOGIN" class="btn btn-info col-lg-4" onclick="return checkValidateData();"
-            style="margin:2% 0  2% 0;" />
-          <button class="btn btn-danger col-lg-4" type="reset">CANCEL</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <script type="text/javascript">
-    function checkValidateData() {
-      let userName = document.getElementById('userName').value;
-      let password = document.getElementById('password').value;
-      let name = document.getElementById('name').value;
-      if (userName && password && name) {
-        return true;
-      } else {
-        alert('Field should not be null');
-        return false;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <title>register</title>
+    <style>
+      span {
+        color: red;
       }
-    }
-  </script>
-</body>
+    </style>
+  </head>
 
+  <body>
+    <%- include ('navbar.ejs') %>
+
+    <h1 style="text-align: center;">Register</h1>
+    <div class="container margin-30 col-md-6">
+      <form method="POST" class="form-handle" action="/user/register">
+        <div>
+          <hr />
+          <br />
+          <div class="form-group col-lg-12">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="Enter your full name"
+              required
+            />
+            <span id="span1"></span>
+          </div>
+
+          <div class="form-group col-lg-12">
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              id="email"
+              placeholder="Enter email"
+              required
+            />
+            <span id="span2"></span>
+          </div>
+
+          <div class="form-group col-lg-12">
+            <input
+              type="text"
+              placeholder="Mobile Number"
+              id="mnumber"
+              class="form-control"
+              onkeydown="return ( event.ctrlKey || event.altKey 
+                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                    || (95<event.keyCode && event.keyCode<106)
+                    || (event.keyCode==8) || (event.keyCode==9) 
+                    || (event.keyCode>34 && event.keyCode<40) 
+                    || (event.keyCode==46) )"
+              required
+            />
+            <span id="span3"></span>
+          </div>
+
+          <div class="form-group col-lg-12">
+            <input
+              type="text"
+              id="userName"
+              name="userName"
+              class="form-control"
+              placeholder="Enter User Name"
+              required
+            />
+            <span id="span4"></span>
+          </div>
+
+          <div class="form-group col-lg-12">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="Enter password"
+              required
+            />
+          </div>
+          <br />
+          <center>
+            <div class="form-group col-lg-12">
+              <input
+                type="submit"
+                value="Register"
+                class="btn btn-info col-lg-4"
+                onclick="return checkValidateData();"
+              />&nbsp;
+              <button class="btn btn-danger col-lg-4" type="reset">
+                CANCEL
+              </button>
+            </div>
+            <a href="/user/login"> already registered ?</a>
+          </center>
+        </div>
+      </form>
+    </div>
+
+    <!-- javaScript code here , -->
+    <script type="text/javascript">
+      function checkValidateData() {
+        var fullname = document.getElementById("name").value;
+        var EmailId = document.getElementById("email").value;
+        var MobileNumber = document.getElementById("mnumber").value;
+        var userName = document.getElementById("userName").value;
+
+        var validatefullname = /^[a-zA-z ]{3,30}$/;
+        var validMail = /^\w{2,15}@\w{2,15}.\w{2,3}$/;
+        var validMob = /^[6789]{1}[0-9]{9}$/;
+        var validateUser = /^[a-zA-z]{3,30}$/;
+
+        if (validatefullname.test(fullname)) {
+          document.getElementById("span1").innerHTML = " ";
+        } else {
+          document.getElementById("span1").innerHTML =
+            " * Must be required character more then 3";
+          return false;
+        }
+
+        if (validMail.test(EmailId)) {
+          document.getElementById("span2").innerHTML = " ";
+        } else {
+          document.getElementById("span2").innerHTML = "* Invalid Mail id";
+          return false;
+        }
+
+        if (validMob.test(MobileNumber)) {
+          document.getElementById("span3").innerHTML = " ";
+        } else {
+          document.getElementById("span3").innerHTML =
+            " * Must be required 10 digits Starts with 6 to 9";
+          return false;
+        }
+
+        if (validateUser.test(userName)) {
+          document.getElementById("span4").innerHTML = " ";
+        } else {
+          document.getElementById("span4").innerHTML =
+            " * Must be required character more then 3";
+          return false;
+        }
+      }
+    </script>
+  </body>
 </html>
