@@ -1,8 +1,6 @@
 # Paperless
 
-```bash 
-Paperless is used to fetch the detail from the documents using google's cloud vision API and stores that data in the database. It is written in NodeJs and uses sequelizer as ORM and Postgres as database.  
-```
+Paperless is used to fetch the detail from the documents using google's cloud vision API and stores that data in the database. It is written in NodeJs and uses sequelizer as ORM and Postgres as database. 
 
 ### Prerequisites
    ```bash 
