@@ -1,7 +1,7 @@
 # Paperless
 
 ```bash 
-paperless description ..
+Paperless is used to fetch the detail from the documents using google's cloud vision API and stores that data in the database. It is written in NodeJs and uses sequelizer as ORM and Postgres as database.  
 ```
 
 ### Prerequisites
@@ -33,7 +33,7 @@ Once you clone or download project go into you folder
  >now copy ***.env.local*** file to ***.env***
  >npm install (it will install all the dependencies required for the project)
  
-#### dotenv file
+#### .env file
 
 ```bash 
 DB_HOST=localhost
@@ -53,8 +53,10 @@ paperless using mostly this technologies.
 
 * [ Express.js ] - Awesome web-based text editor
 * [ EJS ] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - Great UI for modern web apps
+* [Bootstrap] - Great UI for modern web apps
 * [Node.js] - Evented I/O for the backend
+* [Sequelize] - A promise based NodeJs ORM for Postgres
+* [Postgres] - Relational open source database 
 
 
 License
